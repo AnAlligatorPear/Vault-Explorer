@@ -1,0 +1,28 @@
+grafana.additionalDataSources:
+    - name: "Vault API"
+      type: "yesoreyeram-infinity-datasource"
+      url: "${vault_address}" 
+      basicAuth: false
+      basicAuthUser: ""
+      isDefault: false
+      jsonData:
+        allowedHosts:
+          - "${vault_address}"  
+        apiKeyKey: "X-Vault-Token"
+        auth_method: "apiKey"
+        global_queries: []
+        oauthPassThru: false
+        readOnly: false
+      secureJsonData:
+        apiKeyValue: "${vault_token}"  
+
+prometheus.additionalScrapeConfigs:
+    - job_name: vault
+      metrics_path: /v1/sys/metrics
+      params:
+        format: ['prometheus']
+      scheme: http  
+      authorization:
+        credentials_file: /etc/prometheus/secrets/vaulttoken/token
+      static_configs:
+        - targets: ['${vault_address}']  

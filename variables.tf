@@ -4,56 +4,25 @@ variable kubernetes_endpoint {
   description = "Kubernetes/Openshift Endpoint" 
 }
 
-# Vault Version
-variable "vault_version" {
-  type = string
-  description = "Vault Version"
-  default = "latest"
-}
-
-variable "vault_license" {
-  type = string
-  description = "Vault License"
-  default = ""
-}
-
-# Vault Sidecar Injector Version
-variable "vault_helm_version" {
-  type = string
-  description = "Vault's Helm Release Version"
-  default = "0.29.1"
-}
-
-# Vault Secret Operator Version
-variable "vso_helm_version" {
-  type = string
-  description = "Vault Secret Operator Helm Release Version"
-  default = "0.9.1"
-}
-
-
-variable vault_public_address {
+variable vault_address {
   type        = string
-  default     = "http://vault.vault.svc.cluster.local:8200"
-  description = "Vault Address e.g https://vault.example.com" 
+  description = "Vault Address e.g https://vault.example.com:8200" 
 }
 
 variable vault_namespace {
   type        = string
-  default     = "root"
   description = "Vault Namespace" 
 }
 
-variable vault_admin_token {
+variable vault_token {
   type        = string
-  default     = "root"
   description = "Vault Token" 
 }
 
 variable kubernetes_namespace {
   type        = string
   default     = "default"
-  description = "Kubernetes Namespace" 
+  description = "Kubernetes namespace name to use" 
 }
 
 # Promethues Stack Helm Version

@@ -1,13 +1,20 @@
-# Monitoring Stack
-# Deploying sidecar injector helm chart
+# Creating K8s Namespaces 
+resource "kubernetes_namespace" "prom" {
+  metadata {
+    annotations = {
+      name = var.kubernetes_namespace
+    }
+    name = var.kubernetes_namespace
+  }
+}
+
+# Deploying Prometheus + Grafana 
 resource "helm_release" "prometheus" {
-  depends_on = [ helm_release.vault ]
   name       = "prometheus"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
-  namespace  = kubernetes_namespace.vault.id
+  namespace  = kubernetes_namespace.prom.id
   version    = var.prom_version
-
 
   values = [
     "${file("prom.stack.values.yml")}"
@@ -17,11 +24,11 @@ resource "helm_release" "prometheus" {
 resource "kubernetes_secret_v1" "vault_token" {
   metadata {
     name = "vaulttoken"
-    namespace  = kubernetes_namespace.vault.id
+    namespace  = kubernetes_namespace.prom.id
   }
 
   data = {
-    token = var.vault_admin_token
+    token = var.vault_token
   }
 
   type = "kubernetes.io/opaque"
