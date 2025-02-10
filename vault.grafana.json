@@ -1013,7 +1013,7 @@
           "source": "url",
           "type": "json",
           "uql": "parse-json\n| scope \"data.total\"\n\n\n",
-          "url": "http://vault.vault.svc.cluster.local:8200/v1/sys/internal/counters/activity/monthly",
+          "url": "/v1/sys/internal/counters/activity/monthly",
           "url_options": {
             "data": "",
             "method": "GET"
@@ -1462,7 +1462,7 @@
           "source": "url",
           "type": "csv",
           "uql": "parse-csv --delimiter \"\t\"",
-          "url": "http://vault.vault.svc.cluster.local:8200/v1/sys/internal/counters/activity/export",
+          "url": "/v1/sys/internal/counters/activity/export",
           "url_options": {
             "data": "",
             "method": "GET",
@@ -1621,7 +1621,7 @@
           "source": "url",
           "type": "json",
           "uql": "parse-csv --delimiter \"\t\"",
-          "url": "http://vault.vault.svc.cluster.local:8200/v1/identity/entity-alias/id",
+          "url": "/v1/identity/entity-alias/id",
           "url_options": {
             "data": "",
             "headers": [
@@ -1837,7 +1837,7 @@
           "source": "url",
           "type": "json",
           "uql": "parse-csv --delimiter \"\t\"",
-          "url": "http://vault.vault.svc.cluster.local:8200/v1/identity/entity/id",
+          "url": "/v1/identity/entity/id",
           "url_options": {
             "data": "",
             "headers": [

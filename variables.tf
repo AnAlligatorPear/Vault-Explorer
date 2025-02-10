@@ -11,6 +11,7 @@ variable vault_address {
 
 variable vault_namespace {
   type        = string
+  default     = "root"
   description = "Vault Namespace" 
 }
 
@@ -21,7 +22,7 @@ variable vault_token {
 
 variable kubernetes_namespace {
   type        = string
-  default     = "default"
+  default     = "prom"
   description = "Kubernetes namespace name to use" 
 }
 

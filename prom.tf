@@ -16,10 +16,22 @@ resource "helm_release" "prometheus" {
   namespace  = kubernetes_namespace.prom.id
   version    = var.prom_version
 
+  # Load the existing YAML configuration and marge the templatefile with the prometheus yaml
+    values = [
+            templatefile("${path.module}/prom.stack.values.yml.tftpl", {
+              vault_address = var.vault_address
+              vault_token  = var.vault_token
+            })
+      ]
+}
+/*
   values = [
     "${file("prom.stack.values.yml")}"
   ]
-}
+  }
+
+*/
+
 
 resource "kubernetes_secret_v1" "vault_token" {
   metadata {
@@ -38,7 +50,7 @@ resource "kubernetes_secret_v1" "vault_token" {
 resource "kubernetes_config_map" "grafana-dashboards-vault" {
   metadata {
     name      = "grafana-dashboard-vault"
-    namespace = kubernetes_namespace.vault.id
+    namespace = kubernetes_namespace.prom.id
 
     labels = {
       grafana_dashboard = 1
