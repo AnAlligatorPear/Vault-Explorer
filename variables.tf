@@ -1,36 +1,36 @@
-variable kubernetes_endpoint {
-  default     =  "https://kubernetes.docker.internal:6443"
+variable "kubernetes_endpoint" {
+  default     = "https://kubernetes.docker.internal:6443"
   type        = string
-  description = "Kubernetes/Openshift Endpoint" 
+  description = "Kubernetes/Openshift Endpoint"
 }
 
-variable vault_address {
+variable "vault_address" {
   type        = string
-  description = "Vault Address e.g https://vault.example.com:8200" 
+  description = "Vault Address e.g https://vault.example.com:8200"
 }
 
-variable vault_namespace {
+variable "vault_namespace" {
   type        = string
   default     = "root"
-  description = "Vault Namespace" 
+  description = "Vault Namespace"
 }
 
-variable vault_token {
+variable "vault_token" {
   type        = string
-  description = "Vault Token" 
+  description = "Vault Token"
 }
 
-variable kubernetes_namespace {
+variable "kubernetes_namespace" {
   type        = string
-  default     = "prom"
-  description = "Kubernetes namespace name to use" 
+  default     = "vaultexplorer"
+  description = "Kubernetes namespace name to use"
 }
 
 # Promethues Stack Helm Version
 variable "prom_version" {
-  type = string
+  type        = string
   description = "Prom Version"
-  default = "68.4.0"
+  default     = "68.4.0"
 }
 
 

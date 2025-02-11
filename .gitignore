@@ -1,0 +1,37 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Exclude all .tfvars files, except the ones in the example folder
+*.tfvars
+!example/*.tfvars
+
+# .tfplan files
+*.tfplan
+
+# Override .gitignore files (never include these)
+!.gitignore
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# macOS
+.DS_Store
+
+# Terraform Enterprise/Cloud
+.tfe
+
+# terraform-docs - only ignore output files, not the templates or configs.
+.terraform-docs.yml
+dist/

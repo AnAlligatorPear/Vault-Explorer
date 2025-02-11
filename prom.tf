@@ -17,12 +17,12 @@ resource "helm_release" "prometheus" {
   version    = var.prom_version
 
   # Load the existing YAML configuration and marge the templatefile with the prometheus yaml
-    values = [
-            templatefile("${path.module}/prom.stack.values.yml.tftpl", {
-              vault_address = var.vault_address
-              vault_token  = var.vault_token
-            })
-      ]
+  values = [
+    templatefile("${path.module}/prom.stack.values.yml.tftpl", {
+      vault_address = var.vault_address
+      vault_token   = var.vault_token
+    })
+  ]
 }
 /*
   values = [
@@ -35,8 +35,8 @@ resource "helm_release" "prometheus" {
 
 resource "kubernetes_secret_v1" "vault_token" {
   metadata {
-    name = "vaulttoken"
-    namespace  = kubernetes_namespace.prom.id
+    name      = "vaulttoken"
+    namespace = kubernetes_namespace.prom.id
   }
 
   data = {
@@ -62,6 +62,6 @@ resource "kubernetes_config_map" "grafana-dashboards-vault" {
   }
 
   data = {
-    "vault.grafana.json"        = file("vault.grafana.json")
+    "vault.grafana.json" = file("vault.grafana.json")
   }
 }
