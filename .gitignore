@@ -37,3 +37,4 @@ crash.*.log
 dist/
 terraform.log
 terraform.lock.hcl
+.terraform.lock.hcl
