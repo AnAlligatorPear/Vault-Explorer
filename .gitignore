@@ -35,3 +35,5 @@ crash.*.log
 # terraform-docs - only ignore output files, not the templates or configs.
 .terraform-docs.yml
 dist/
+terraform.log
+terraform.lock.hcl
