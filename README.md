@@ -3,7 +3,7 @@
 ![img](img/vault_grafana_dashboard.png)
 
 ### Description
-This was inspired by [Nico Kabar's Vault Lab](https://github.com/nicolaka/vault-lab/) that has been stripped of the local deployment of a lab Vault Cluster, Vault Namespaces and other extraneous additions, to focus solely on providing metrics observability into an existing Vault deployment hosted anywhere. The purpose of this application is to provide HCP Vault Dedicated users with a quick and easy metrics tool to measure client counts, traces, and other log information in a digestible format.  
+This was inspired by [Nico Kabar's Vault Lab](https://github.com/nicolaka/vault-lab/) that has been stripped of the local deployment of a lab Vault Cluster, Vault Namespaces and other extraneous additions, to focus solely on providing metrics observability into an existing HCP Vault Dedicated deployment. The purpose of this application is to provide HCP Vault Dedicated users with a quick and easy metrics tool to measure client counts, traces, and other log information in a digestible format.  
 
 Please note that this repo is specifically for HCP Vault Dedicated users. For Terraform Enterprise, please use this tree: WIP 
 
