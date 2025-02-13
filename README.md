@@ -3,18 +3,18 @@
 ![img](img/vault_grafana_dashboard.png)
 
 ### Description
-This was inspired by [Nico Kabar's Vault Lab](https://github.com/nicolaka/vault-lab/) that has been stripped of the local deployment of a lab Vault Cluster, Vault Namespaces and other extraneous additions, to focus solely on providing metrics observability into an existing Vault deployment hosted anywhere. The purpose of this application is to provide Vault users with a quick and easy metrics tool to measure client counts, traces, and other log information in a digestible format.  
+This was inspired by [Nico Kabar's Vault Lab](https://github.com/nicolaka/vault-lab/) that has been stripped of the local deployment of a lab Vault Cluster, Vault Namespaces and other extraneous additions, to focus solely on providing metrics observability into an existing Vault deployment hosted anywhere. The purpose of this application is to provide HCP Vault Dedicated users with a quick and easy metrics tool to measure client counts, traces, and other log information in a digestible format.  
 
-
+Please note that this repo is specifically for HCP Vault Dedicated users. For Terraform Enterprise, please use this tree: WIP 
 
 ### Requirements:
 
-- Vault Enterprise/Dedicated License 
+- HCP Vault Dedicated License 
 - [Docker for Mac/Windows](https://docs.docker.com/desktop/install/mac-install/) with Kubernetes turned on (only tested this on Docker for Mac)
 - Terraform CLI
 - Vault CLI
 - `kubectl` CLI
-- [httpie](https://httpie.io/) which is easier/cooler version of `curl`. You can use just curl but need to convert the commands :)
+- curl (only necessary if you want to run the API commands manually for counts)
 
 
 ### Deployment Steps
@@ -40,7 +40,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 
 
-4. Initialize Terraform and run Terraform Plan/Apply. You will be asked to provide your Vault's Address and Admin Token during the Apply process.
+4. Initialize Terraform and run Terraform Plan/Apply. You will be asked to provide your Vault's Address and Admin Token during the Apply process. Make sure you provide your HCP Vault Dedicate Public URL and Admin Token
 
 
 ```
@@ -111,21 +111,21 @@ vaultexplorer     Active   3m47s
 ### Vault API Identity + Clients Reference
 ```
 # Returns details on the total number of entities 
-$ http $VAULT_ADDR/v1/sys/internal/counters/entities "X-Vault-Token: $VAULT_TOKEN"
+$ curl -H "X-Vault-Token: $VAULT_TOKEN" "$VAULT_ADDR/v1/sys/internal/counters/entities"
 
  # Returns details on the total number of tokens
-$ http $VAULT_ADDR/v1/sys/internal/counters/tokens "X-Vault-Token: $VAULT_TOKEN"
+$ curl -H "X-Vault-Token: $VAULT_TOKEN" "$VAULT_ADDR/v1/sys/internal/counters/tokens"
 
  
 # Returns total client count breakdown by auth method by namespace and new clients by month
-$ http $VAULT_ADDR/v1/sys/internal/counters/activity "X-Vault-Token: $VAULT_TOKEN" 
+$ curl -H "X-Vault-Token: $VAULT_TOKEN" "$VAULT_ADDR/v1/sys/internal/counters/activity"
 
 # Returns a list of unique clients that had activity within the provided start/end time 
-$ http $VAULT_ADDR/v1/sys/internal/counters/activity/export "X-Vault-Token: $VAULT_TOKEN" 
+$ curl -H "X-Vault-Token: $VAULT_TOKEN" "$VAULT_ADDR/v1/sys/internal/counters/activity/export" 
 
   
 # Returns client activity for the current month 
-$ http $VAULT_ADDR/v1/sys/internal/counters/activity/monthly "X-Vault-Token: $VAULT_TOKEN" 
+$ curl -H "X-Vault-Token: $VAULT_TOKEN" "$VAULT_ADDR/v1/sys/internal/counters/activity/monthly" 
 
 ```
 
@@ -161,6 +161,7 @@ $ terraform destroy --auto-approve
 ```
 
 
+Due to the use of TF Variables in the apply process, please provide your HCP Vault Dedicated URL again, and leave the token blank. 
 
 
 
